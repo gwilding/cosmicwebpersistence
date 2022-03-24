@@ -1,1 +1,3 @@
-# Demo persistence calculation of a low-ress cosmic simulation
+# Demo persistence calculation of a low-res cosmic simulation
+
+Update readme file.
