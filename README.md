@@ -1,6 +1,6 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gwilding/cosmicwebpersistence/HEAD?labpath=cosmic_web_persistence_demo.ipynb)
 
-# Demo of exploring a low-res cosmic simulation using TDA
+# Exploring a low-res cosmic simulation using TDA
 
 Check out the binder directly in the browser, or explore the notebook locally.
 
