@@ -1,4 +1,4 @@
-name: tda
+name: cosmic-tda
 channels:
   - conda-forge
   - defaults
@@ -204,4 +204,4 @@ dependencies:
     - pyqt5-sip==4.19.18
     - pyqtchart==5.12
     - pyqtwebengine==5.12.1
-prefix: /home/georg/anaconda3/envs/tda
+prefix: /home/georg/anaconda3/envs/cosmic-tda
