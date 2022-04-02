@@ -10,7 +10,7 @@ Check out the binder directly in the browser, or explore the notebook locally.
 conda install -c conda-forge gudhi 
 ```
 
-In addition to `Gudhi`, only `numpy` and `matplotlib` are needed, as well as `tqdm` (for progressbars). Alternatively to installing those manually, you can create your own environment within conda from the [`environment.yml`](https://github.com/gwilding/cosmicwebpersistence/blob/main/environment.yml) file in the repository:
+In addition to `Gudhi`, only `numpy`, `scipy` and `matplotlib` are needed, as well as `tqdm` (for progressbars). Alternatively to installing those manually, you can create your own environment within conda from the [`environment.yml`](https://github.com/gwilding/cosmicwebpersistence/blob/main/environment.yml) file in the repository:
 
 ```
 conda env create -f environment.yml
