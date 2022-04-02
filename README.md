@@ -14,7 +14,5 @@ In addition to `Gudhi`, only `numpy`, `scipy` and `matplotlib` are needed, as we
 
 ```
 conda env create -f environment.yml
-conda activate persistence-demo
+conda activate cosmic-tda
 ```
-
-Update readme file.
