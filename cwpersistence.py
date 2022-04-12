@@ -17,7 +17,7 @@ from matplotlib.legend_handler import HandlerTuple
 import os
 
 import gudhi
-    
+
 def main():
     density_path = './data/density_files'
 
@@ -30,7 +30,7 @@ def main():
         density_cube = np.load(os.path.join(density_path,den_file))
         # Convert to log10
         density_cube = np.log10(density_cube)
-        
+
         # Calculate the periodic cubical complex
         # The first argument is the shape of the field.
         # The second argument is the field as 1d array. As a convention, we use
@@ -40,13 +40,13 @@ def main():
         cubical_complex = gudhi.PeriodicCubicalComplex(density_cube.shape,
                                                        -density_cube.flatten(),
                                                        (True,True,True))
-        
+
         # Calculate the persistence of the complex
-        # This is the sub-level set persistence of the inverted field 
+        # This is the sub-level set persistence of the inverted field
         persistence = cubical_complex.persistence()
         # We invert the obtained persistence to super-level set persistence
         persistence = [(dim, (-birth, -death)) for (dim, (birth, death)) in persistence]
-        
+
         # For ease of plotting persistence diagrams later on, and to analyse
         # the topological features of each dimension seperately, we transform
         # into a numpy array
@@ -54,13 +54,13 @@ def main():
         # and subsequently split according to the appearing dimensions (0,1,2)
         # We ignore the single 3-dimensional feature.
         persistence = [persistence[persistence[:,0]==d,1:] for d in [0,1,2] ]
-        
+
         # Store in lists.
         persistence_diagrams_evolution.append(persistence)
-    
-    
+
+
     # Calculate the Betti curves
-    # From the list of persistence features we can calculate the 
+    # From the list of persistence features we can calculate the
     # Betti curves, i.e. the Betti numbers for a range of filtration values
     # overall vector for Betti curves:
     low  = min([min([np.min(p[p > -np.inf]) for p in persistence])
@@ -74,7 +74,7 @@ def main():
         betti_curves = [np.array([np.sum((p[:,1] <= filtr_val) & (p[:,0] >= filtr_val))
                                   for filtr_val in betti_curve_vector])
                                         for p in persistence]
-        
+
         # The same list comprehension, but in detail:
         betti_curves = []
         for p in persistence: # loop through dimensions
@@ -90,12 +90,12 @@ def main():
                                        (birth_values >= filtr_val))
                 b_curve.append(betti_numbers)
             betti_curves.append(np.array(b_curve))
-            
+
         # Store in lists.
         Betti_curve_evolution.append(betti_curves)
-    
-    
-    
+
+
+
     # Evaluate Betti curves using a skew normal distribution:
     def skewnormal(x,mu,sigma,skew,scale):
         """Skew ln, uses scipy.stats: norm"""
@@ -117,8 +117,7 @@ def main():
             perr = np.sqrt(np.diag(pcov))
             parameters_evolution[snap_id, dim, :, 0] = parameters
             parameters_evolution[snap_id, dim, :, 1] = perr
-    
-    
+
     # Visualisations
     # Betti curve evolution, using a colour gradient
     # Dimension 0: red
@@ -148,7 +147,7 @@ def main():
     ax.set_ylabel(r'$\beta_i$')
     fig.gca().add_artist(legend1)
     fig.savefig('Betti_curve_evolution.png',bbox_inches='tight')
-            
+
     # Parameter evolution
     color_dict = {0: 'r', 1: 'xkcd:goldenrod', 2: 'b'}
     fig, ax = plt.subplots(2,2,figsize=(15,15),sharex=True)
@@ -166,7 +165,8 @@ def main():
     ax[1,0].set_xlabel('Redshift')
     ax[1,1].set_xlabel('Redshift')
     fig.savefig('Parameter_curve_evolution.png',bbox_inches='tight')
-    
-    
+
+
 if __name__ == '__main__':
     main()
+    
